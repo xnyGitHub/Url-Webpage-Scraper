@@ -7,7 +7,7 @@ def startDriver():
     #Setting up the driver path and options
     PATH = "./chromedriver" 
     options = Options()
-    # options.add_argument("--headless")
+    options.add_argument("--headless")
     driver = webdriver.Chrome(options=options, executable_path=PATH)
 
     #Taking in user input
