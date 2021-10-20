@@ -16,14 +16,17 @@ def startDriver():
     #Loading the website
     try:
         driver.get(URL)
-        # printContent(hURL)
+        printContent(driver,URL)
     except Exception as e:
         print(e)
         print("Please read error above")
     #Do something
 
-def printContent():
-    pass
+def printContent(driver,URL):
+    text = driver.find_element_by_tag_name("body").get_attribute("innerText")
+    print(text)
+    #saveToFile(text,URL)
+    driver.close()
     #Get content
     
 def saveToFile():
