@@ -20,17 +20,20 @@ def startDriver():
     except Exception as e:
         print(e)
         print("Please read error above")
-    #Do something
 
 def printContent(driver,URL):
     text = driver.find_element_by_tag_name("body").get_attribute("innerText")
     print(text)
-    #saveToFile(text,URL)
+    saveToFile(text,URL)
     driver.close()
     #Get content
     
-def saveToFile():
-    pass
+def saveToFile(text,URL):
+    startURL = "www."
+    endURL = ".com"
+    websiteName = (URL[URL.index(startURL)+len(startURL):URL.index(endURL)])
+    with open(websiteName+'Content.txt', 'w') as f:
+        f.write(text)
     #Save to file
 
 if __name__ == "__main__":
