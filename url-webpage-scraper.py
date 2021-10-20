@@ -4,8 +4,7 @@ from selenium.webdriver.chrome.options import Options #To make browser headless(
 
 
 def startDriver():
-    #Setting up the driver path and optionsZipFile The class for reading and writing ZIP files.  See section 
-    PATH = "./chromedriver" 
+    #Setting up the driver path and options
     options = Options()
     options.add_argument("--headless") #Allows for headless browsing 
     driver = webdriver.Chrome(options=options, executable_path=PATH)
