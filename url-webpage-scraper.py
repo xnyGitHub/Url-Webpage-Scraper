@@ -11,7 +11,7 @@ def startDriver():
         PATH = "./chromedriver.exe"
     elif platform.system() == "Darwin": #Mac
         if platform.processor() == "i386" or platform.processor() == "arm":
-            PATH = "./chromedriver"
+            PATH = "./mac-m1/chromedriver"
         else:
             #Link to chromedriver
             pass
