@@ -5,11 +5,12 @@ from selenium.webdriver.chrome.options import Options #To make browser headless(
 
 
 def startDriver():
+    print(platform.system())
     PATH = ""
     if platform.system() == "Windows":
         PATH = "./chromedriver.exe"
     elif platform.system() == "Darwin": #Mac
-        if platform.processor() == "arm":
+        if platform.processor() == "i386" or platform.processor() == "arm":
             PATH = "./chromedriver"
         else:
             #Link to chromedriver
