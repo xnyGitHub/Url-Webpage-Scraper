@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options #To make browser headless(
 
 
 def startDriver():
-    print(platform.system())
+    # print(platform.system())
     PATH = ""
     if platform.system() == "Windows":
         PATH = "./windows/chromedriver.exe"
