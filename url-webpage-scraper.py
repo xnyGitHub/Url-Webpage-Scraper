@@ -1,11 +1,21 @@
 #Importing
+import platform
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options #To make browser headless(Run in background)
 
 
 def startDriver():
+    PATH = ""
+    if platform.system() == "Windows":
+        PATH = "./chromedriver.exe"
+    elif platform.system() == "Darwin": #Mac
+        if platform.processor() == "arm":
+            PATH = "./chromedriver"
+        else:
+            #Link to chromedriver
+            pass
+
     #Setting up the driver path and options
-    PATH = "./chromedriver"
     options = Options()
     options.add_argument("--headless") #Allows for headless browsing 
     driver = webdriver.Chrome(options=options, executable_path=PATH)
