@@ -13,8 +13,7 @@ def startDriver():
         if platform.processor() == "i386" or platform.processor() == "arm":
             PATH = "./mac-m1/chromedriver"
         else:
-            #Link to chromedriver
-            pass
+            PATH = "./mac/chromedriver"
 
     #Setting up the driver path and options
     options = Options()
