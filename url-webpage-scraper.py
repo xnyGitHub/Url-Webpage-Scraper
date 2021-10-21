@@ -1,5 +1,6 @@
 #Importing
 import platform
+import argparse
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options #To make browser headless(Run in background)
 
@@ -21,7 +22,13 @@ def startDriver():
     driver = webdriver.Chrome(options=options, executable_path=PATH)
 
     #Taking in user input
-    URL = input("Enter a website: ")
+    parser = argparse.ArgumentParser(description='A tutorial of argparse!')
+    parser.add_argument("--web", required=True, type=str, help= "Enter the full link of the website you want to scrape")
+
+
+    args = parser.parse_args()
+    URL = args.web
+    # URL = input("Enter a website: ")
 
     #Loading the website
     try:
