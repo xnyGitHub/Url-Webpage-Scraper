@@ -51,7 +51,7 @@ def saveToFile(text,URL):
     startURL = "www."
     endURL = ".com"
     websiteName = (URL[URL.index(startURL)+len(startURL):URL.index(endURL)])
-    with open(websiteName+'Content.txt', 'w') as f:
+    with open("content/"+websiteName+'Content.txt', 'w') as f:
         f.write(text)
     
 
