@@ -22,19 +22,35 @@
         font-weight: 200;
         color: #000;
       }
+
+      /* General Styles */
+
+      .container {
+        max-width: 120rem;
+        padding: 3.2rem 4.8rem;
+        margin: 0 auto;
+      }
+
+      .center-text {
+        text-align: center;
+      }
     </style>
   </head>
   <body>
-    <header>
-      <div>
-        <h1>Please enter the website you would like to scrape</h1>
-        <h3>Please enter the full link e.g. https://example.com.</h3>
-        <form>
+    <header class="section-header">
+      <div class="container">
+        <h1 class="center-text">
+          Please enter the website you would like to scrape
+        </h1>
+        <h3 class="center-text">
+          Please enter the full link e.g. https://example.com.
+        </h3>
+        <form class="center-text">
           <label>URL</label>
           <input />
           <button>Submit</button>
         </form>
-        <p>{{content}}</p>
+        <p class="center-text">{{content}}</p>
       </div>
     </header>
   </body>
