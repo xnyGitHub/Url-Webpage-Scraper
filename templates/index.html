@@ -34,23 +34,66 @@
       .center-text {
         text-align: center;
       }
+
+      .center-element {
+        margin: 0 auto;
+      }
+
+      .italic {
+        font-style: italic;
+      }
+
+      /* Section-Header */
+      /* Headings */
+
+      .heading--primary {
+        margin-bottom: 0.8rem;
+      }
+
+      .heading--tertiary {
+        margin-bottom: 1.8rem;
+      }
+
+      /* Forms */
+
+      .form {
+        margin-bottom: 1.2rem;
+      }
+
+      /* Button */
+      .input {
+        border-radius: 1rem;
+        padding: 0.4rem 0.8rem;
+      }
+      .button {
+        padding: 0.4rem 0.8rem;
+        background-color: #222;
+        border: none;
+        border-radius: 1rem;
+        color: white;
+      }
+
+      .error {
+        font-weight: bold;
+        color: red;
+      }
     </style>
   </head>
   <body>
     <header class="section-header">
       <div class="container">
-        <h1 class="center-text">
+        <h1 class="center-text heading--primary">
           Please enter the website you would like to scrape
         </h1>
-        <h3 class="center-text">
+        <h3 class="center-text heading--tertiary italic">
           Please enter the full link e.g. https://example.com.
         </h3>
-        <form class="center-text">
-          <label>URL</label>
-          <input />
-          <button>Submit</button>
+        <form method="post" class="form center-text">
+          <label for="website">URL</label>
+          <input class="input" type="text" id="website" name="website" />
+          <button class="button">Submit</button>
         </form>
-        <p class="center-text">{{content}}</p>
+        <p class="center-text error">{{content}}</p>
       </div>
     </header>
   </body>
