@@ -1,22 +1,29 @@
-from flask import Flask, render_template,request,url_for,redirect
+from flask import Flask, render_template,request,url_for,redirect,session
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 import platform
 
 app = Flask(__name__)
+app.config['SESSION_TYPE'] = 'memcached'
+app.config['SECRET_KEY'] = 'super secret key'
 
 @app.route('/', methods=["GET","POST"])
 def homePage():
     if request.method == "POST":
-        #If the user presses the button
-        pass
+        content = webScraper(request.form['website'])
+        if content:
+            session['content'] = content
+            return redirect(url_for('scrapePage'))
+        else:
+            return render_template("index.html",content = "Please make sure you enter a valid link")
     else:
         return render_template("index.html")
     
 @app.route('/scraped_page')
 def scrapePage():
     #Show the content here
-    return render_template("scraped_page.html")
+    content = session.get("content",None)
+    return render_template("scraped_page.html",content=content)
     
 def webScraper(userInput):
     #userInput is the link (http://example.com) that the user wants to scrape
