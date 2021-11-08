@@ -1,5 +1,5 @@
 from flask import Flask, render_template,request,url_for,redirect,session
-import url_webpage_scraper
+import arg_app
 
 
 app = Flask(__name__)
@@ -8,7 +8,7 @@ app = Flask(__name__)
 def homepage():
     if request.method == "POST":
         URL = request.form['website']
-        content = url_webpage_scraper.get_content(URL)
+        content = arg_app.get_content(URL)
         
         if content != None:
             return render_template(
