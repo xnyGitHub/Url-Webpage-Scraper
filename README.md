@@ -92,7 +92,7 @@ Unit-testing ensures that as developers constantly make improvements and changes
 
 To run the unit tests execute the command below.
 
-- `python -m pytest or python3 -m pytest`
+- `python -m pytest` or `python3 -m pytest`
   ![Testing](https://imgur.com/CYByfQT.png)
 
 ##### or for a more verbose output do
