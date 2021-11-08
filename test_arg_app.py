@@ -1,5 +1,7 @@
-import pytest
+from unittest.mock import patch, mock_open
 import arg_app
+import pytest
+import os
 
 #--------------TESING argsparse--------------
 def test_get_args():
@@ -54,3 +56,30 @@ def test_if_geckodriver_was_imported():
 def test_if_options_was_imported():
     module_name = "selenium.webdriver.firefox.options"
     assert module_name in arg_app.sys.modules
+    
+#--------------TESING FILE SAVING--------------
+def test_check_if_file_exists():
+    content = ''
+    arg_app.save_content(content)
+    assert os.path.exists("content.txt")
+  
+def test_save_empty_content():
+    open_mock = mock_open()
+    with patch("arg_app.open", open_mock, create=True):
+        arg_app.save_content("")
+
+    open_mock.assert_called_with("content.txt", "w+")
+    open_mock.return_value.write.assert_called_once_with("")
+
+    
+def test_save_content():
+    open_mock = mock_open()
+    with patch("arg_app.open", open_mock, create=True):
+        arg_app.save_content("test-data")
+
+    open_mock.assert_called_with("content.txt", "w+")
+    open_mock.return_value.write.assert_called_once_with("test-data")
+    
+
+if __name__ == "__main__":
+    pytest.main(["-v"])
