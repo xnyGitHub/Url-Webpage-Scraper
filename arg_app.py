@@ -30,6 +30,7 @@ def get_content(URL):
         driver.quit()
         return content
     except Exception as e:
+        driver.quit()
         print("Please enter a valid link")
   
     
