@@ -37,3 +37,20 @@ def test_get_content_with_invalid_website():
     url = "https://www.dfasdf.co.uk"
     content = arg_app.get_content(url)
     assert content == None
+    
+#--------------TESING IMPORTS--------------
+def test_if_selenium_was_imported():
+    module_name = 'selenium'
+    assert module_name in arg_app.sys.modules
+    
+def test_if_webdriver_was_imported():
+    module_name = 'selenium.webdriver'
+    assert module_name in arg_app.sys.modules
+
+def test_if_geckodriver_was_imported():
+    module_name = 'get_gecko_driver'
+    assert module_name in arg_app.sys.modules
+
+def test_if_options_was_imported():
+    module_name = "selenium.webdriver.firefox.options"
+    assert module_name in arg_app.sys.modules
