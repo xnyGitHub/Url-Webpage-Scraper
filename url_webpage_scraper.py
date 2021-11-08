@@ -1,59 +1,49 @@
 #Importing
-import platform
+import sys
+import os
 import argparse
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options #To make browser headless(Run in background)
+from selenium.webdriver.firefox.options import Options #To make browser headless(Run in background)
+from get_gecko_driver import GetGeckoDriver
+
+def get_args(args):
+    parser = argparse.ArgumentParser(description='A tutorial of argparse!')
+    parser.add_argument("--web", required=True, type=str, help= "Enter the full link of the website")
+    return parser.parse_args(args)
 
 
-def startDriver():
-    # print(platform.system())
-    PATH = ""
-    if platform.system() == "Windows":
-        PATH = "./windows/chromedriver.exe"
-    elif platform.system() == "Darwin": #Mac
-        if platform.processor() == "i386" or platform.processor() == "arm":
-            PATH = "./mac-m1/chromedriver"
-        else:
-            PATH = "./mac/chromedriver"
-
+def get_content(URL):
+    #Pulling in the latest chromedriver
+    get_driver = GetGeckoDriver()
+    get_driver.install()
+    
     #Setting up the driver path and options
     options = Options()
-    options.add_argument("--headless") #Allows for headless browsing 
-    driver = webdriver.Chrome(options=options, executable_path=PATH)
-
-    #Taking in user input
-    parser = argparse.ArgumentParser(description='A tutorial of argparse!')
-    parser.add_argument("--web", required=True, type=str, help= "Enter the full link of the website you want to scrape")
-
-
-    args = parser.parse_args()
-    URL = args.web
-    # URL = input("Enter a website: ")
+    options.headless = True
+    driver = webdriver.Firefox(options=options)
 
     #Loading the website
     try:
         driver.get(URL)
-        printContent(driver,URL)
+        content = driver.find_element_by_tag_name("body").get_attribute("innerText")
+        content =  content.replace('\n',' ')
+        driver.quit()
+        return content
     except Exception as e:
-        print(e)
-        print("Please read error above")
-
-def printContent(driver,URL):
-    #Print the content to the terminal.
-    text = driver.find_element_by_tag_name("body").get_attribute("innerText")
-    print(text)
-    saveToFile(text,URL)
-    driver.close()
+        print("Please enter a valid link")
+  
     
-    
-def saveToFile(text,URL):
+def save_content(text):
     #Save the text content of the webpage to a file.
-    startURL = "www."
-    endURL = ".com"
-    websiteName = (URL[URL.index(startURL)+len(startURL):URL.index(endURL)])
-    with open("content/"+websiteName+'Content.txt', 'w') as f:
-        f.write(text)
+    with open("content.txt", 'w+') as w:
+        w.write(text)
     
+    #print(text)
+
+def main():
+    URL = get_args(sys.argv[1:])
+    content = get_content(URL.web)
+    save_content(content)
 
 if __name__ == "__main__":
-    startDriver()
+    main()
